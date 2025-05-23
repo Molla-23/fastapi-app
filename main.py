@@ -10,7 +10,9 @@ app = FastAPI()
 
 class InputData(BaseModel):
     features: list
-
+@app.get("/")
+def read_root():
+    return {"message": "FastAPI is running. Go to /predict to use the model."}
 @app.post("/predict")
 def predict(data: InputData):
     input_array = np.array(data.features).reshape(1, -1)
